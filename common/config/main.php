@@ -10,8 +10,8 @@ return [
             'class' => 'yii\i18n\Formatter',
             'defaultTimeZone' => 'Europe/Moscow',
             'timeZone' => 'GMT+3',
-            'dateFormat' => 'php:d/m/Y',
-            'datetimeFormat' => 'php:d/m/Y H:i:s',
+            'dateFormat' => 'php:d M Y',
+            'datetimeFormat' => 'php:d M Y H:i:s',
             'timeFormat' => 'H:i:s',
         ],
         'stringHelper' => [

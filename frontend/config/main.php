@@ -5,6 +5,7 @@ $params = array_merge(
 );
 
 return [
+    'language' => 'ru-RU',
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -13,11 +14,6 @@ return [
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'enableCsrfValidation' => false,
-        ],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
@@ -39,24 +35,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'comment/index' => 'comments',
-            ],
-        ],
-        'assetManager' => [
-            'bundles' => [
-                'yii\web\JqueryAsset' => [
-                    'sourcePath' => null,
-                    'basePath' => '@webroot',
-                    'baseUrl' => '@web',
-                    'js' => [
-                        'js/jquery/jquery.js',
-                    ]
-                ],
+                'register' => 'user/signup',
             ],
         ],
     ],
     'params' => $params,
-    'aliases' => [
-        '@images' => '/var/www/project/frontend/web/images',
-    ],
 ];
