@@ -4,6 +4,7 @@ namespace frontend\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "user".
@@ -18,21 +19,19 @@ use yii\db\ActiveRecord;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class User extends ActiveRecord
-{
+class User extends ActiveRecord implements IdentityInterface {
+
     /**
-     * @inheritdoc
+     * @return name table
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{user}}';
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'username' => 'Имя пользователя',
@@ -45,4 +44,63 @@ class User extends ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    /**
+     * @param string $username
+     * @return array
+     */
+    public static function findByUsername($username) {
+        return self::find()->where(['username' => $username])->one();
+    }
+
+    /**
+     * @param string $password
+     * @return boolean
+     */
+    public function validatePassword($password) {
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
+    }
+
+    /**
+     * Finds an identity by the given ID.
+     *
+     * @param string|int $id the ID to be looked for
+     * @return IdentityInterface|null the identity object that matches the given ID.
+     */
+    public static function findIdentity($id) {
+        return static::findOne($id);
+    }
+
+    /**
+     * Finds an identity by the given token.
+     *
+     * @param string $token the token to be looked for
+     * @return IdentityInterface|null the identity object that matches the given token.
+     */
+    public static function findIdentityByAccessToken($token, $type = null) {
+        return static::findOne(['access_token' => $token]);
+    }
+
+    /**
+     * @return int|string current user ID
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return string current user auth key
+     */
+    public function getAuthKey() {
+        return $this->auth_key;
+    }
+
+    /**
+     * @param string $authKey
+     * @return bool if auth key is valid for current user
+     */
+    public function validateAuthKey($authKey) {
+        return $this->getAuthKey() === $authKey;
+    }
+
 }

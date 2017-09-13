@@ -27,6 +27,7 @@ class SignupForm extends Model {
             [['username'], 'trim'],
             [['username'], 'required'],
             [['username'], 'string', 'min' => 2, 'max' => 255],
+            [['username'], 'unique', 'targetClass' => User::className()],
             
             [['email'], 'trim'],
             [['email'], 'required'],
@@ -42,8 +43,8 @@ class SignupForm extends Model {
     }
 
     /**
-     * 
-     * @return boolean
+     * Save user
+     * @return User || Null
      */
     public function save() {
         if ($this->validate()) {
@@ -56,9 +57,10 @@ class SignupForm extends Model {
             $user->updated_at = $time;
             
             // метод save() вернет TRUE || FALSE
-            return $user->save();
+            if ($user->save()){
+                return $user;
+            }
         }
-        return FALSE;
     }
     
     /**
