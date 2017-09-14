@@ -5,6 +5,7 @@ namespace frontend\models\forms;
 use Yii;
 use yii\base\Model;
 use frontend\models\User;
+use frontend\models\events\user\UserRegisteredEvent;
 
 /**
  * Description of SignupForm
@@ -58,9 +59,11 @@ class SignupForm extends Model {
             
             // метод save() вернет TRUE || FALSE
             if ($user->save()){
-                Yii::$app->emailService->notifyUser($user, 'Welcome');
-                Yii::$app->emailService->notifyAdmins('Зарегистрировался новый пользователь');
+                $event = new UserRegisteredEvent();
+                $event->user = $user;
+                $event->subject = "New user registered!";
                 
+                $user->trigger(User::USER_REGISTERED, $event);
                 return $user;
             }
         }
