@@ -58,6 +58,9 @@ class SignupForm extends Model {
             
             // метод save() вернет TRUE || FALSE
             if ($user->save()){
+                Yii::$app->emailService->notifyUser($user, 'Welcome');
+                Yii::$app->emailService->notifyAdmins('Зарегистрировался новый пользователь');
+                
                 return $user;
             }
         }

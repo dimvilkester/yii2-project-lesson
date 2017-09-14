@@ -5,6 +5,7 @@ namespace frontend\models;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use common\components\UsernotificationInterface;
 
 /**
  * This is the model class for table "user".
@@ -19,7 +20,7 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class User extends ActiveRecord implements IdentityInterface {
+class User extends ActiveRecord implements IdentityInterface, UsernotificationInterface {
 
     /**
      * @return name table
@@ -102,5 +103,12 @@ class User extends ActiveRecord implements IdentityInterface {
     public function validateAuthKey($authKey) {
         return $this->getAuthKey() === $authKey;
     }
-
+    
+    /**
+     * @return string
+     */
+    public function getEmail() {
+        return $this->email;
+    } 
+    
 }
