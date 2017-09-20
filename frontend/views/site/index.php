@@ -1,6 +1,7 @@
 <?php
-
 /* @var $this yii\web\View */
+
+use yii\helpers\Url;
 
 $this->title = 'My Yii Application';
 ?>
@@ -9,11 +10,9 @@ $this->title = 'My Yii Application';
     <div class="jumbotron">
         <h1>Hello, <?php if(Yii::$app->user->identity){echo Yii::$app->user->identity->username;}?></h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <p><a class="btn btn-lg btn-success" href="<?php echo Url::to(['search/index']) ;?>">Search</a></p>
     </div>
-
+    
     <div class="body-content">
 
         <div class="row">
