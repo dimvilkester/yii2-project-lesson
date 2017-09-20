@@ -22,9 +22,20 @@ class NewsSearch {
        
         return Yii::$app->db->createCommand($sql)->queryAll();
     }
-
-    public static function fulltextSearch() {
-        
+    
+    /**
+     * @param string $keyword
+     * @return array
+     */
+    public static function fulltextSearch($keyword) {
+        $sql = "SELECT * "
+                . "FROM news "
+                . "WHERE "
+                . "MATCH (content)"
+                . "AGAINST ('$keyword') "
+                . "LIMIT 20;";
+       
+        return Yii::$app->db->createCommand($sql)->queryAll();       
     }
 
     public static function sphinxSearch() {

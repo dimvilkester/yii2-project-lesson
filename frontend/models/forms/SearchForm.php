@@ -39,7 +39,7 @@ class SearchForm extends Model {
      */
     public function search () {
         if ($this->validate()) {
-            return NewsSearch::simpleSearch($this->keyword);
+            return NewsSearch::fulltextSearch($this->keyword);
         }
     }
 

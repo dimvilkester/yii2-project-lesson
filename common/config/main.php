@@ -14,8 +14,8 @@ return [
             'datetimeFormat' => 'php:d M Y H:i:s',
             'timeFormat' => 'H:i:s',
         ],
-        'emailService' => [
-            'class' => 'common\components\EmailService',
+        'stringHelper' => [
+            'class' => 'common\components\StringHelper',
         ],
     ],  
 ];

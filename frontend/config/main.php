@@ -16,7 +16,7 @@ return [
             'enableCsrfValidation' => false,
         ],
         'user' => [
-            'identityClass' => 'frontend\models\User',
+            'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -39,9 +39,9 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-                'register' => 'user/signup',
-            ],
+            //'rules' => [
+            //    'news' => 'news/index',
+            //],
         ],
     ],
     'params' => $params,
