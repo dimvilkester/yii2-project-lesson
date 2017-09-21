@@ -42,5 +42,14 @@ class SearchForm extends Model {
             return NewsSearch::fulltextSearch($this->keyword);
         }
     }
+    
+    /**
+     * @return array
+     */
+    public function searchAdvanced () {
+        if ($this->validate()) {
+            return NewsSearch::sphinxSearch($this->keyword);
+        }
+    }
 
 }

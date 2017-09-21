@@ -10,7 +10,10 @@ $this->title = 'My Yii Application';
     <div class="jumbotron">
         <h1>Hello, <?php if(Yii::$app->user->identity){echo Yii::$app->user->identity->username;}?></h1>
 
-        <p><a class="btn btn-lg btn-success" href="<?php echo Url::to(['search/index']) ;?>">Search</a></p>
+        <p>
+            <a class="btn btn-lg btn-success" href="<?php echo Url::to(['search/index']) ;?>">Fulltext search (search v.2)</a> 
+            <a class="btn btn-lg btn-success" href="<?php echo Url::to(['search/advanced']) ;?>">Sphinx search (search v.3)</a>
+        </p>
     </div>
     
     <div class="body-content">
